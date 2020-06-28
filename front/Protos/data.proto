@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package data;
+import "google/protobuf/timestamp.proto";
+
+service Data {
+  rpc GetData(DataRequest) returns (DataResponse);
+  rpc GetDataStream(DataRequest) returns (stream DataResponse);
+}
+
+message DataRequest {}
+
+message DataPoint {
+  string name = 1;
+  double value = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message DataResponse { repeated DataPoint result = 1; }

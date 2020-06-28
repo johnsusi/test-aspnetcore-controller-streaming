@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  envoy:
+    build: ./envoy
+
+  grafana:
+    build: ./grafana
+    ports:
+      - '3001:3000'
+  
+  influxdb:
+    build: ./influxdb
+
+  telegraf:
+    build: ./telegraf
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+
+  back:
+    build: ./back
+#    environment:
+#      ASPNETCORE_URLS: http://+:5000
+    volumes:
+      - certs:/var/lib/certs
+
+  front:
+    build: ./front
+    environment:
+      ASPNETCORE_URLS: http://+:5000
+      # DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2UNENCRYPTEDSUPPORT: 1
+    volumes:
+      - certs:/var/lib/certs
+    ports:
+      - '5000:5000'
+  inspect:
+    image: ubuntu
+    command: bash
+    volumes:
+      - certs:/var/lib/certs
+
+volumes:
+  certs:

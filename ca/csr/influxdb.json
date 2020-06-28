@@ -1,0 +1,6 @@
+{
+  "CN": "influxdb",
+  "hosts": [
+    "influxdb"
+  ]
+}

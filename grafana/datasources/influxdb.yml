@@ -1,0 +1,34 @@
+apiVersion: 1
+
+deleteDatasources:
+  - name: InfluxDB (test)
+    orgId: 1
+
+datasources:
+  - name: InfluxDB (test)
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: test
+    isDefault: true
+    version: 1
+    editable: false
+  - name: InfluxDB (telegraf)
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: telegraf
+    isDefault: false
+    version: 1
+    editable: false    
+  - name: InfluxDB (_internal)
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: _internal
+    isDefault: false
+    version: 1
+    editable: false        
